@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>C# Developer</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #0d0d0d;
+    color: #e0e0e0;
+    font-family: 'Consolas', 'Courier New', monospace;
+  }
+
+  /* NAV */
+  nav {
+    background: #111;
+    border-bottom: 2px solid #9b59b6;
+    padding: 16px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .logo {
+    font-size: 22px;
+    font-weight: bold;
+    color: #9b59b6;
+  }
+  .logo span { color: #fff; }
+  .nav-links { list-style: none; display: flex; gap: 32px; }
+  .nav-links a {
+    color: #aaa;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: #9b59b6; }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, #111 0%, #1a0a2e 50%, #0d0d0d 100%);
+    padding: 100px 40px;
+    text-align: center;
+    border-bottom: 1px solid #222;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(155,89,182,0.15);
+    border: 1px solid #9b59b6;
+    color: #9b59b6;
+    padding: 6px 20px;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+  .hero h1 {
+    font-size: 56px;
+    color: #fff;
+    margin-bottom: 12px;
+  }
+  .hero h1 span { color: #9b59b6; }
+  .hero-sub {
+    font-size: 16px;
+    color: #888;
+    margin-bottom: 40px;
+  }
+  .hero-code {
+    display: inline-block;
+    background: #111;
+    border: 1px solid #222;
+    border-left: 3px solid #9b59b6;
+    padding: 20px 32px;
+    text-align: left;
+    font-size: 14px;
+    line-height: 1.8;
+    color: #ccc;
+    margin-bottom: 40px;
+  }
+  .kw { color: #569cd6; }
+  .cl { color: #4ec9b0; }
+  .str { color: #ce9178; }
+  .cm { color: #6a9955; }
+
+  .btn {
+    padding: 12px 32px;
+    font-family: inherit;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: inline-block;
+    margin: 0 8px;
+  }
+  .btn-primary {
+    background: #9b59b6;
+    color: #fff;
+  }
+  .btn-primary:hover { background: #8e44ad; }
+  .btn-ghost {
+    background: transparent;
+    color: #9b59b6;
+    border: 1px solid #9b59b6;
+  }
+  .btn-ghost:hover { background: rgba(155,89,182,0.1); }
+
+  /* SECTIONS */
+  section { padding: 80px 40px; max-width: 1000px; margin: 0 auto; }
+
+  .section-title {
+    font-size: 28px;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+  .section-title span { color: #9b59b6; }
+  .section-line {
+    width: 40px;
+    height: 2px;
+    background: #9b59b6;
+    margin-bottom: 40px;
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+  }
+  .about-text { color: #aaa; font-size: 15px; line-height: 1.9; }
+  .about-text p { margin-bottom: 16px; }
+  .info-list { list-style: none; }
+  .info-list li {
+    padding: 12px 0;
+    border-bottom: 1px solid #1a1a1a;
+    font-size: 14px;
+    color: #888;
+    display: flex;
+    gap: 12px;
+  }
+  .info-list li b { color: #9b59b6; min-width: 80px; }
+
+  /* SKILLS */
+  .skills-wrap { background: #111; }
+  .skills-inner { max-width: 1000px; margin: 0 auto; padding: 80px 40px; }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .skill-card {
+    background: #0d0d0d;
+    border: 1px solid #1e1e1e;
+    border-top: 2px solid #9b59b6;
+    padding: 28px 24px;
+    transition: transform 0.3s, border-color 0.3s;
+  }
+  .skill-card:hover { transform: translateY(-4px); border-color: #8e44ad; }
+  .skill-card h3 {
+    color: #fff;
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  .skill-card p { color: #777; font-size: 13px; line-height: 1.7; }
+
+  /* BARS */
+  .bars-wrap { background: #0d0d0d; }
+  .bars-inner { max-width: 1000px; margin: 0 auto; padding: 80px 40px; }
+  .bar-item { margin-bottom: 24px; }
+  .bar-head {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: #aaa;
+    margin-bottom: 8px;
+  }
+  .bar-head span:last-child { color: #9b59b6; }
+  .bar-track {
+    height: 4px;
+    background: #1e1e1e;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #6c3483, #9b59b6);
+    width: 0%;
+    border-radius: 2px;
+    transition: width 1s ease;
+  }
+
+  /* CONTACT */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+  }
+  .contact-list { list-style: none; }
+  .contact-list li {
+    padding: 16px 0;
+    border-bottom: 1px solid #1a1a1a;
+    font-size: 14px;
+    color: #888;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+  .contact-list li b { color: #9b59b6; }
+  .form { display: flex; flex-direction: column; gap: 12px; }
+  .form input, .form textarea {
+    background: #111;
+    border: 1px solid #1e1e1e;
+    color: #e0e0e0;
+    padding: 12px 16px;
+    font-family: inherit;
+    font-size: 14px;
+    outline: none;
+    resize: none;
+    transition: border-color 0.3s;
+  }
+  .form input:focus, .form textarea:focus { border-color: #9b59b6; }
+  .form input::placeholder, .form textarea::placeholder { color: #555; }
+
+  /* TOAST */
+  #toast {
+    position: fixed;
+    bottom: 30px; right: 30px;
+    background: #1a1a1a;
+    border: 1px solid #9b59b6;
+    color: #e0e0e0;
+    padding: 14px 24px;
+    font-size: 13px;
+    z-index: 999;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.4s;
+    pointer-events: none;
+  }
+  #toast.show { opacity: 1; transform: translateY(0); }
+
+  /* FOOTER */
+  footer {
+    background: #111;
+    border-top: 1px solid #1e1e1e;
+    text-align: center;
+    padding: 24px;
+    font-size: 13px;
+    color: #555;
+  }
+  footer span { color: #9b59b6; }
+
+  /* FULLSCREEN DIVIDER */
+  .divider { border: none; border-top: 1px solid #1a1a1a; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo"><span>{</span> C# <span>}</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">Про мене</a></li>
+    <li><a href="#skills">Навички</a></li>
+    <li><a href="#contact">Контакт</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">// C# Developer</div>
+  <h1>Іван <span>Петренко</span></h1>
+  <p class="hero-sub">Розробник програмного забезпечення на платформі .NET</p>
+
+  <div class="hero-code">
+    <span class="cm">// Про мене в одному класі</span><br>
+    <span class="kw">public class</span> <span class="cl">Developer</span><br>
+    {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">public string</span> Name = <span class="str">"Іван Петренко"</span>;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">public string</span> Role = <span class="str">"C# Developer"</span>;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">public string</span> Stack = <span class="str">".NET, OOP, SOLID"</span>;<br>
+    }
+  </div>
+
+  <br>
+  <a href="#contact" class="btn btn-primary">Зв'язатись</a>
+  <a href="#skills" class="btn btn-ghost">Мої навички</a>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-title">// <span>Про</span> мене</div>
+  <div class="section-line"></div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>Розробляю програмне забезпечення на C# та платформі .NET. Застосовую принципи SOLID та патерни проектування у реальних проєктах.</p>
+      <p>Маю досвід роботи з ООП, архітектурними патернами (Singleton, Factory, Observer, Decorator) та побудовою чистого і підтримуваного коду.</p>
+    </div>
+    <ul class="info-list">
+      <li><b>Ім'я:</b> Іван Петренко</li>
+      <li><b>Місто:</b> Київ, Україна</li>
+      <li><b>Мова:</b> C# / .NET</li>
+      <li><b>Досвід:</b> 3 роки</li>
+      <li><b>Статус:</b> Відкритий до роботи</li>
+    </ul>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- SKILLS -->
+<div class="skills-wrap" id="skills">
+  <div class="skills-inner">
+    <div class="section-title">// <span>Навички</span></div>
+    <div class="section-line"></div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <h3>C# / .NET</h3>
+        <p>ООП, класи, інтерфейси, абстрактні класи, колекції, LINQ, async/await.</p>
+      </div>
+      <div class="skill-card">
+        <h3>Патерни SOLID</h3>
+        <p>SRP, OCP, LSP, ISP, DIP — застосування в реальних проєктах.</p>
+      </div>
+      <div class="skill-card">
+        <h3>Design Patterns</h3>
+        <p>Singleton, Factory, Observer, Decorator, Facade — повна реалізація.</p>
+      </div>
+      <div class="skill-card">
+        <h3>Web</h3>
+        <p>HTML, CSS, JavaScript — базова верстка та інтерактивність.</p>
+      </div>
+      <div class="skill-card">
+        <h3>Бази даних</h3>
+        <p>SQL, основи роботи з базами даних, Entity Framework.</p>
+      </div>
+      <div class="skill-card">
+        <h3>Git</h3>
+        <p>Контроль версій, робота з репозиторіями, GitHub.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BARS -->
+<div class="bars-wrap">
+  <div class="bars-inner">
+    <div class="section-title">// <span>Рівень</span> знань</div>
+    <div class="section-line"></div>
+    <div class="bar-item">
+      <div class="bar-head"><span>C# / .NET</span><span>85%</span></div>
+      <div class="bar-track"><div class="bar-fill" data-w="85"></div></div>
+    </div>
+    <div class="bar-item">
+      <div class="bar-head"><span>OOP / Патерни</span><span>80%</span></div>
+      <div class="bar-track"><div class="bar-fill" data-w="80"></div></div>
+    </div>
+    <div class="bar-item">
+      <div class="bar-head"><span>HTML / CSS / JS</span><span>70%</span></div>
+      <div class="bar-track"><div class="bar-fill" data-w="70"></div></div>
+    </div>
+    <div class="bar-item">
+      <div class="bar-head"><span>SQL</span><span>65%</span></div>
+      <div class="bar-track"><div class="bar-fill" data-w="65"></div></div>
+    </div>
+    <div class="bar-item">
+      <div class="bar-head"><span>Git</span><span>75%</span></div>
+      <div class="bar-track"><div class="bar-fill" data-w="75"></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-title">// <span>Контакт</span></div>
+  <div class="section-line"></div>
+  <div class="contact-grid">
+    <ul class="contact-list">
+      <li><b>Email:</b> ivan@csharp.dev</li>
+      <li><b>Telegram:</b> @ivan_dev</li>
+      <li><b>GitHub:</b> github.com/ivandev</li>
+      <li><b>Місто:</b> Київ, Україна</li>
+    </ul>
+    <div class="form">
+      <input type="text" id="fname" placeholder="Ваше ім'я">
+      <input type="email" id="femail" placeholder="Email">
+      <textarea id="fmsg" rows="4" placeholder="Повідомлення"></textarea>
+      <button class="btn btn-primary" onclick="send()">Надіслати</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2025 <span>Іван Петренко</span> — C# Developer
+</footer>
+
+<div id="toast">✓ Повідомлення надіслано</div>
+
+<script>
+  // SKILL BARS
+  const bars = document.querySelectorAll('.bar-fill');
+  const barObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        bars.forEach(b => b.style.width = b.dataset.w + '%');
+        barObs.disconnect();
+      }
+    });
+  }, { threshold: 0.3 });
+  barObs.observe(document.querySelector('.bars-wrap'));
+
+  // SEND FORM
+  function send() {
+    const n = document.getElementById('fname').value.trim();
+    const e = document.getElementById('femail').value.trim();
+    const m = document.getElementById('fmsg').value.trim();
+    if (!n || !e || !m) { showToast('Заповніть всі поля'); return; }
+    document.getElementById('fname').value = '';
+    document.getElementById('femail').value = '';
+    document.getElementById('fmsg').value = '';
+    showToast('✓ Повідомлення надіслано');
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3000);
+  }
+</script>
+</body>
+</html>
